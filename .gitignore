@@ -1,1 +1,7 @@
 Mydemkey.pem
+
+# Terraform local exclusions
+terraform/.terraform/
+terraform/*.tfstate*
+terraform/*.tfvars*
+terraform/.terraform.lock.hcl
