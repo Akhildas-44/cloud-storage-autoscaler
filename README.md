@@ -2,9 +2,9 @@
 
 A production-grade, state-aware cloud storage orchestration platform designed to eliminate enterprise block-storage underutilization and prevent high-velocity application outages.
 
-While AWS natively supports dynamic volume expansion via the Elastic Block Store (EBS) control plane, downscaling remains fundamentally restricted due to block-corruption and filesystem shrinkage constraints. This platform implements a stateless, safe block-migration pipeline that mirrors Lucidity Cloud's core storage optimization architecture, offering automated bidirectional scaling under active database workloads.
+While AWS natively supports dynamic volume expansion via the Elastic Block Store (EBS) control plane, downscaling remains fundamentally restricted due to block-corruption and filesystem shrinkage constraints. This platform implements a stateless, safe block-migration pipeline that  offers automated bidirectional scaling under active database workloads.
 
-## 🏗️ Architecture Design & System Boundaries
+##  Architecture Design & System Boundaries
 
 ```text
 [Start Pipeline] ──► 1. DR Guard (Backup Tracking Tags)
@@ -20,7 +20,7 @@ While AWS natively supports dynamic volume expansion via the Elastic Block Store
                                                     ▼
                                              4. Form gp3 Target & Sync Data
 ```
-## 🛠️ Low-Level Technical Mechanics
+##  Low-Level Technical Mechanics
 
 * **Asynchronous Telemetry Tracking (`daemon.py`)**: Implements an isolated, continuous-loop background agent that samples block utilization via native non-blocking SSH execution layers. Processes data patterns over a line-buffered FIFO queue window (`collections.deque`) via a Sliding Window Moving Average algorithm to damp out transient metric spikes and filter transient read anomalies.
 * **Emergency Upside Scaling**: If utilization crosses the 80% threshold pressure zone, the daemon bypasses filesystem manipulation, triggering direct cloud control-plane modifications (`modify_volume`) to immediately expand disk capacity and double resource layouts on the fly, proactively mitigating production out-of-memory outages.
